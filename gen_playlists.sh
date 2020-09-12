@@ -11,6 +11,9 @@
 #   2) Run it
 #   3) Copy generated files (ex: "Nintendo - Nintendo Entertainment System.lpl") to /storage/playlists
 
+# Supported emulators
+extensions_list="nes smc z64"
+
 # HEADER
 get_header() {
     cat << EOF
@@ -33,8 +36,7 @@ get_footer() {
 EOF
 }
 
-extensions_list="nes smc"
-
+# Processing
 for ext in $extensions_list; do
         files_list=.tmp_gen_playlists
         find . -type f -iname *.$ext > $files_list
@@ -46,6 +48,8 @@ for ext in $extensions_list; do
           nes) db_name="Nintendo - Nintendo Entertainment System.lpl"
                ;;
           smc) db_name="Nintendo - Super Nintendo Entertainment System.lpl"
+               ;;
+          z64) db_name="Nintendo - Nintendo 64.lpl"
                ;;
         esac
         get_header > $db_name
